@@ -1,0 +1,35 @@
+body {
+  font-family: Helvetica;
+  padding: 2em;
+  background-color: white;
+  max-width: 800px; 
+}
+
+h1 {
+  font-size: 2.5em;
+  text-align: center;
+}
+
+.source {
+  background-color: #E55126;
+  float: left;
+  margin-right: 20px;
+}
+
+#source_language {
+  }
+
+.target {
+  background-color: #E5A227;
+  float:left;
+}
+
+.submit {
+  
+  background-color: white;
+  opacity: 0.9;
+  
+  color: black;
+}
+
+
