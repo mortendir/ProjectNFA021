@@ -14,21 +14,19 @@ h1 {
   background-color: #E55126;
   float: left;
   margin-right: 20px;
+  padding: 10px;
 }
-
-#source_language {
-  }
 
 .target {
   background-color: #E5A227;
   float:left;
+  margin-right: 20px;
+  padding: 10px;
 }
 
 .submit {
-  
   background-color: white;
   opacity: 0.9;
-  
   color: black;
 }
 

@@ -1,6 +1,6 @@
 <?php
-	require 'model/language_dao.php';
-	require 'view/home.php';
+	require_once 'model/language_dao.php';
+	require_once 'view/home.php';
 
 	class HomeController {
 		private $languageDao;

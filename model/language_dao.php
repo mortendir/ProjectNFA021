@@ -1,5 +1,5 @@
 <?php
-	require 'language.php';
+	require_once 'language.php';
 
 	class LanguageDao {
 		private $link;
