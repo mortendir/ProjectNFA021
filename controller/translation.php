@@ -18,7 +18,7 @@ class TranslationController {
 		$errorMessages = $this->verify($languageCodes);
 
 		$homepage = new HomePage($languages);
-		$homepage->display($errorMessages);
+		$homepage->display($errorMessages, $_POST);
 	}	
 
 	private function verify($languageCodes) {
