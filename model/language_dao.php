@@ -6,7 +6,7 @@
 
 		public function __construct($link) {
 			$this->link = $link;
-		}
+		}	
 
 		public function selectLanguages() {
 			$sql = "SELECT name,code FROM Languages ORDER BY name ASC";

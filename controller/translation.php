@@ -1,12 +1,15 @@
 <?php
 require_once 'model/language_dao.php';
+require_once 'model/translation_dao.php';
 require_once 'view/home.php';
 
 class TranslationController {
 	private $languageDao;
+	private $translationDao;
 
-	public function __construct($languageDao) {
+	public function __construct($languageDao, $translationDao) {
 		$this->languageDao = $languageDao;
+		$this->translationDao = $translationDao;
 	}
 
 	public function processSubmit() {
@@ -18,7 +21,8 @@ class TranslationController {
 		$errorMessages = $this->verify($languageCodes);
 
 		$homepage = new HomePage($languages);
-		$homepage->display($errorMessages, $_POST);
+		$targetPhrases = $this->translationDao->selectTranslations($_POST["source_phrase"], $_POST["source_language"], $_POST["target_language"]);
+		$homepage->display($errorMessages, $_POST, $targetPhrases);
 	}	
 
 	private function verify($languageCodes) {
@@ -42,5 +46,6 @@ class TranslationController {
 		}
 		return $errorMessages;
 	}
+	
 }
 ?>

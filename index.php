@@ -6,9 +6,10 @@
 	mysqli_set_charset($link,'utf8');
 	mysqli_select_db($link, "Translation_Project");
 	$languageDao = new LanguageDao($link);	
+	$translationDao = new TranslationDao($link);
 
 	if (isset($_POST["submit"])) {
-		$controller = new TranslationController($languageDao);
+		$controller = new TranslationController($languageDao, $translationDao);
 		$controller->processSubmit();
 	} else {
 		$controller = new HomeController($languageDao);

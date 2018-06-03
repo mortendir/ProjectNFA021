@@ -4,7 +4,7 @@
 		public function __construct($languages) {
 			$this->languages = $languages;
 		}
-		public function display($errors = array(), $submittedData = array()) {
+		public function display($errors = array(), $submittedData = array(),$targetPhrases = array()) {
 
 ?>
 <!DOCTYPE html>
@@ -34,6 +34,7 @@
 			    	?>
 			  	</select>
 			  	<?php if(isset($errors["source_language"])) echo '<span class="error">' . $errors["source_language"] . '</span>';?>
+			  	<div><input type="text" id="source_phrase" name="source_phrase" value="<?php if(isset($submittedData["source_phrase"])) echo $submittedData["source_phrase"]; ?>"
 		  	</div>
 		  </div>
 		  <div>
@@ -52,6 +53,9 @@
 			    	?>
 				</select>
 				<?php if(isset($errors["target_language"])) echo '<span class="error">' . $errors["target_language"] . '</span>';?>
+				<div id="target_phrases"><?php foreach ($targetPhrases as $phrase) { 
+					echo $phrase;
+				}?></div>
 			</div>
 		</div>
 	  	<input type="submit" name="submit" value="Translate" />
