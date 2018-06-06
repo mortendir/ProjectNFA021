@@ -29,20 +29,23 @@ class TranslationController {
 		$errorMessages = array();
 
 		if (empty($_POST["source_language"])) {
-			$errorMessages["source_language"] = "Choose a language";
+			$errorMessages["source_language"] = "Please choose a language";
 		} 
 		if (empty($_POST["target_language"])) { 
-			$errorMessages["target_language"] = "Choose a language";
+			$errorMessages["target_language"] = "Please choose a language";
 		}
 		if (empty($errorMessages) && $_POST["source_language"] == $_POST["target_language"]) {
-			$errorMessages["source_language"] = "Do not choose the same language";
-			$errorMessages["target_language"] = "Do not choose the same language";
+			$errorMessages["source_language"] = "Please do not choose the same language";
+			$errorMessages["target_language"] = "Please do not choose the same language";
 		}
 		if (empty($errorMessages["source_language"]) && !in_array($_POST["source_language"], $languageCodes)) {
-			$errorMessages["source_language"] = "Choose a valid language";
+			$errorMessages["source_language"] = "Please choose a valid language";
 		}
 		if (empty($errorMessages["target_language"]) && !in_array($_POST["target_language"], $languageCodes)) {
-			$errorMessages["target_language"] = "Choose a valid language";
+			$errorMessages["target_language"] = "Please choose a valid language";
+		}
+		if (empty($_POST["source_phrase"])) {
+			$errorMessages["source_phrase"] = "Please write a phrase";
 		}
 		return $errorMessages;
 	}
