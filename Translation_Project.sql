@@ -2,6 +2,7 @@ USE Translation_Project;
 
 DROP FUNCTION IF EXISTS match_phrase;
 DROP TABLE IF EXISTS Translations;
+DROP TABLE IF EXISTS SamplePhrases;
 DROP TABLE IF EXISTS Phrases;
 DROP TABLE IF EXISTS Languages;
 
@@ -51,6 +52,26 @@ BEGIN
 	RETURN result;
 END@
 DELIMITER ;
+
+
+CREATE TABLE SamplePhrases (
+	`id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	`content` VARCHAR(500) NOT NULL,
+	`phrase_id` INTEGER NOT NULL,
+	CONSTRAINT FK_PhraseId FOREIGN KEY (`phrase_id`) REFERENCES Phrases(`id`),
+	CONSTRAINT UN_SamplePhrase UNIQUE (`content`, `phrase_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO SamplePhrases(`content`, `phrase_id`) SELECT 'Der Ball traf ihn im Gesicht.', match_phrase('Gesicht', 'de');
+INSERT INTO SamplePhrases(`content`, `phrase_id`) SELECT 'Mir geht\'s sehr gut.', match_phrase('gut', 'de');
+INSERT INTO SamplePhrases(`content`, `phrase_id`) SELECT 'He should say it to my face.', match_phrase('face', 'en');
+INSERT INTO SamplePhrases(`content`, `phrase_id`) SELECT 'El trabajo se ha realizado bien.', match_phrase('bien', 'es');
+INSERT INTO SamplePhrases(`content`, `phrase_id`) SELECT 'Los ojos están en la cara.', match_phrase('cara', 'es');
+INSERT INTO SamplePhrases(`content`, `phrase_id`) SELECT 'Ce travail est très bien.', match_phrase('bien', 'fr');
+INSERT INTO SamplePhrases(`content`, `phrase_id`) SELECT 'Chacun de nous a un visage différent.', match_phrase('visage', 'fr');
+INSERT INTO SamplePhrases(`content`, `phrase_id`) SELECT 'Onu iyi tanırım.', match_phrase('iyi','tr');
+INSERT INTO SamplePhrases(`content`, `phrase_id`) SELECT 'Paketin arka yüzünde adres var.', match_phrase('yüz','tr');
+INSERT INTO SamplePhrases(`content`, `phrase_id`) SELECT 'Top yüzüne çarptı.', match_phrase('yüz','tr');
 
 
 CREATE TABLE Translations (

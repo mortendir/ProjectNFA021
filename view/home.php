@@ -4,7 +4,7 @@
 		public function __construct($languages) {
 			$this->languages = $languages;
 		}
-		public function display($errors = array(), $submittedData = array(), $targetPhrases = array()) {
+		public function display($errors = array(), $submittedData = array(), $translations = array()) {
 
 ?>
 <!DOCTYPE html>
@@ -61,12 +61,15 @@
 				</div>
 				<?php 
 				if (empty($errors) && !empty($submittedData)) {
-					if (empty($targetPhrases)) {
+					if (empty($translations)) {
 						echo "Sorry, no translation is found."; 
 					} else {
 						echo '<div id="target_phrases">';
-						foreach ($targetPhrases as $phrase) { 
-							echo $phrase;
+						foreach ($translations as $translation) { 
+							echo $translation->getContent()."<br>";
+							foreach ($translation->getSamplePhrases() as $sample) {
+								echo $sample."<br>";
+							}
 						}
 						echo '</div>';
 					} 

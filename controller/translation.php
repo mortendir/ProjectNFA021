@@ -21,8 +21,8 @@ class TranslationController {
 		$errorMessages = $this->verify($languageCodes);
 
 		$homepage = new HomePage($languages);
-		$targetPhrases = $this->translationDao->selectTranslations($_POST["source_phrase"], $_POST["source_language"], $_POST["target_language"]);
-		$homepage->display($errorMessages, $_POST, $targetPhrases);
+		$translations = $this->translationDao->selectTranslations($_POST["source_phrase"], $_POST["source_language"], $_POST["target_language"]);
+		$homepage->display($errorMessages, $_POST, $translations);
 	}	
 
 	private function verify($languageCodes) {
