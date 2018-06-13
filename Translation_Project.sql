@@ -1,10 +1,13 @@
+CREATE DATABASE IF NOT EXISTS Translation_Project;
 USE Translation_Project;
+
 
 DROP FUNCTION IF EXISTS match_phrase;
 DROP TABLE IF EXISTS Translations;
 DROP TABLE IF EXISTS SamplePhrases;
 DROP TABLE IF EXISTS Phrases;
 DROP TABLE IF EXISTS Languages;
+DROP TABLE IF EXISTS Users;
 
 CREATE TABLE Languages (
     `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -79,7 +82,8 @@ CREATE TABLE Translations (
 	`source_phrase_id` INTEGER NOT NULL,
 	`target_phrase_id` INTEGER NOT NULL,
 	CONSTRAINT FK_SourceId FOREIGN KEY (`source_phrase_id`) REFERENCES Phrases(`id`),
-	CONSTRAINT FK_TargetId FOREIGN KEY (`target_phrase_id`) REFERENCES Phrases(`id`)
+	CONSTRAINT FK_TargetId FOREIGN KEY (`target_phrase_id`) REFERENCES Phrases(`id`),
+	CONSTRAINT UN_Translation UNIQUE (`source_phrase_id`, `target_phrase_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -99,3 +103,11 @@ INSERT INTO Translations(`source_phrase_id`, `target_phrase_id`) SELECT match_ph
 INSERT INTO Translations(`source_phrase_id`, `target_phrase_id`) SELECT match_phrase('cara', 'es'), match_phrase('yüz','tr');
 INSERT INTO Translations(`source_phrase_id`, `target_phrase_id`) SELECT match_phrase('bien', 'fr'), match_phrase('iyi','tr');
 INSERT INTO Translations(`source_phrase_id`, `target_phrase_id`) SELECT match_phrase('visage', 'fr'), match_phrase('yüz','tr');
+
+
+CREATE TABLE Users (
+	`id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	`username` VARCHAR(100) NOT NULL UNIQUE,
+	`password` VARCHAR(100) NOT NULL,
+	CONSTRAINT UN_User_Pass UNIQUE (`username`, `password`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

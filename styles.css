@@ -1,7 +1,22 @@
+html {
+ height: 100%;
+}
+
 body {
   font-family: Helvetica;
-  padding: 2em;
-  background-color: white;
+  background: linear-gradient(#b3d9ff, #8080ff);
+  background-repeat: no-repeat;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  width:300px;
+  display: block;
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto
 }
 
 h1 {
@@ -10,12 +25,14 @@ h1 {
 }
 
 label {
-  color: blue;
-  padding: 10px;
+  color: #000000;
+  padding: 50px;
 }
 
 #translation_settings {
   overflow: auto;
+  margin-top: 80px;
+  margin-left: 230px;
 }
 
 .source, .target {
@@ -24,23 +41,78 @@ label {
   margin-bottom: 5px;
 }
 
+#source_phrase {
+  margin-top: 20px;
+}
+
 .error {
   color: red;
   font-style: italic;
   font-size: 10pt;
 }
 
-.submit {
-  background-color: white;
-  opacity: 0.9;
+#translate_button, #login_button {
+  border-color: blue;
+  border-width: medium;
+  border-radius: 4px;
+  background-color: transparent;
+  width: 150px;
+  height: 35px;
+  font-size: 20px;
   color: black;
+  margin-left: 300px;
+  margin-top: 50px;
+}
+
+#translate_button:hover, #login_button:hover {
+border-color: #000000;
+cursor: pointer;
+color: blue;
 }
 
 #target_phrases {
-  color: black;
-  padding-left: 30px;
-  padding-top: 5px;
-  outline: #4CAF50 solid 1px;
+  margin-top: 10px;
+  background-color: transparent;
+  color: blue;
+  outline: #000000 solid 2px;
+}
+#translated_phrase {
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  padding-left: 50px;
 }
 
+#sample_phrases {
+  margin-top: 5px;
+  color: #000000;
+}
 
+#login_form {
+  overflow: auto;
+  margin-top: 80px;
+  margin-left: 260px;
+}
+#login_link {
+  margin-top: 60px;
+  margin-left: 280px;
+}
+
+#contribute { text-decoration: underline; cursor: pointer;}
+
+.hidden { display: none;}
+
+.visible { display: block;}
+
+#banner { 
+  position: fixed;
+  width: 100%;
+  top: 5px;
+  background-color: green;
+  animation: fadeout 8s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; height: 0; }
+}

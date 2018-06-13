@@ -1,11 +1,12 @@
-<?php
+ <?php
+ 
 	class HomePage {
 		private $languages;
 		public function __construct($languages) {
 			$this->languages = $languages;
 		}
-		public function display($errors = array(), $submittedData = array(), $translations = array()) {
-
+		public function display($contributionSuccessful = false, $errors = array(), $submittedData = array(), $translations = array()) {
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,8 +17,25 @@
 	<title>Chicken Translate &middot; Crowdsourced Translation Platform</title>
 </head>
 <body>
-	<h1>Chicken Translate</h1>
+	<?php
+	if ($contributionSuccessful) { ?>
+		<p id="banner">Contribution chickenfully added. Thanks a cluck!</p>
+	<?php }	?>
+	<img src="images/chicken_logo.png" alt="Chatting chickens">
+	<header>
+		<h1>Chicken Translate</h1>
+		<?php 
+		if (isset($_SESSION['user'])) {
+			echo '<p>Welcome ' . $_SESSION['user'] . '</p>';
+			echo '<a href="index.php?action=dologout">Log out</a>';
+		} else {
+			echo '<a href="index.php?action=login">Log in</a>';
+			echo '<a href="index.php?action=signup">Sign up</a>';
+		}
+		?>
+	</header>
 	<form action="index.php" method="post" id="translation">
+		<input type="hidden" id="action" name="action" value="dotranslate">
 		<div id="translation_settings">
 			<div class="source">
 				<div>
@@ -60,25 +78,73 @@
 					<?php if(isset($errors["target_language"])) echo '<span class="error">' . $errors["target_language"] . '</span>';?>
 				</div>
 				<?php 
-				if (empty($errors) && !empty($submittedData)) {
-					if (empty($translations)) {
-						echo "Sorry, no translation is found."; 
-					} else {
-						echo '<div id="target_phrases">';
-						foreach ($translations as $translation) { 
-							echo $translation->getContent()."<br>";
-							foreach ($translation->getSamplePhrases() as $sample) {
-								echo $sample."<br>";
-							}
+				if (empty($errors) && !empty($submittedData) || !empty($errors['target_phrase'])) {
+					echo '<div id="target_phrases">';
+					foreach ($translations as $translation) { 
+						echo "<div id='translated_phrase'>" . $translation->getContent() ."<br>";
+						foreach ($translation->getSamplePhrases() as $sample) {
+							echo "<div id='sample_phrases'>" . $sample ."<br>";
 						}
-						echo '</div>';
-					} 
+						echo "</div>";
+					} ?>
+					<?php if (empty($errors['target_phrase'])) { ?>
+					<p id="contribution_message">Would you like to <span id="contribute">add a translation</span>?</p> 
+					<?php } ?>
+					<div id="translation_panel" class="<?php if (empty($errors['target_phrase'])) echo 'hidden'; else echo 'visible'; ?>">
+						<label>Suggestion</label>
+						<input type="text" name="target_phrase" placeholder="Suggestion goes here" value="<?php if(isset($submittedData["target_phrase"])) echo $submittedData["target_phrase"]; ?>" />
+						<?php if(isset($errors["target_phrase"])) echo '<span class="error">' . $errors["target_phrase"] . '</span>';?>
+					</div>
+					<?php
+					echo '</div>';
 				}?>
 				</div>
 			</div>
 		</div>
-	  	<input type="submit" name="submit" value="Translate" />
+	  	<input type="submit" name="translate" value="<?php if (empty($errors['target_phrase'])) echo 'Translate'; else echo 'Send'; ?>" id="translate_button" />
 	</form>
+	<script>
+	main();
+<?php
+if (!empty($errors['target_phrase'])) { ?>
+    lockTranslation();
+<?php } ?>
+
+	function main() {
+		var contributeLink = document.querySelector('#contribute');
+		if (contributeLink != null) {
+			contributeLink.addEventListener("click", showSentenceContributionForm, false);
+		}
+
+		function showSentenceContributionForm() {
+		    document.querySelector("#translation_panel").style.display = "block";
+		    document.querySelector("#contribution_message").style.display = "none";
+		    document.querySelector("#translate_button").value = "Send";
+		    lockTranslation();
+		}
+	}
+
+	function lockTranslation() {
+	    document.querySelector("#action").value = "docontribute";
+	    document.querySelector("#source_phrase").readOnly = true;
+	    transformIntoReadOnlyInput("#source_language");
+	    transformIntoReadOnlyInput("#target_language");
+
+	    function transformIntoReadOnlyInput(id) {
+			var langList = document.querySelector(id);
+			var value = langList.options[langList.selectedIndex].value;
+			
+			var input = document.createElement("input");
+			input.setAttribute("type", "text");
+			input.setAttribute("name", langList.name);
+			input.setAttribute("id", langList.id);
+			input.setAttribute("readOnly", "true");
+			input.setAttribute("value", value);
+
+			langList.parentNode.replaceChild(input, langList);
+		}
+	}
+	</script>
 </body>
 </html>
 <?php
