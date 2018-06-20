@@ -111,3 +111,5 @@ CREATE TABLE Users (
 	`password` VARCHAR(100) NOT NULL,
 	CONSTRAINT UN_User_Pass UNIQUE (`username`, `password`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO Users(`username`, `password`) VALUES ('admin', 'admin');

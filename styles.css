@@ -1,5 +1,5 @@
 html {
- height: 100%;
+  height: 100%;
 }
 
 body {
@@ -8,7 +8,19 @@ body {
   background-repeat: no-repeat;
   font-size: 20px;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
+  width: 60%;
+}
+
+header {
+  margin: 40px auto;
+}
+
+p { margin: 0;}
+
+#links {
+  display: flex;
+  justify-content: space-around;
 }
 
 img {
@@ -30,15 +42,14 @@ label {
 }
 
 #translation_settings {
-  overflow: auto;
-  margin-top: 80px;
-  margin-left: 230px;
+  clear: both;
 }
 
 .source, .target {
   float: left;
   padding: 10px;
   margin-bottom: 5px;
+  margin-left:50px;
 }
 
 #source_phrase {
@@ -51,7 +62,8 @@ label {
   font-size: 10pt;
 }
 
-#translate_button, #login_button {
+input[type=submit] {
+  position: relative;
   border-color: blue;
   border-width: medium;
   border-radius: 4px;
@@ -60,8 +72,8 @@ label {
   height: 35px;
   font-size: 20px;
   color: black;
-  margin-left: 300px;
-  margin-top: 50px;
+  margin-left: 160px;
+  margin-top: 70px;
 }
 
 #translate_button:hover, #login_button:hover {
@@ -71,15 +83,21 @@ color: blue;
 }
 
 #target_phrases {
+  position: relative;
   margin-top: 10px;
+  margin-left: 30px;
   background-color: transparent;
-  color: blue;
+  color: black;
   outline: #000000 solid 2px;
+
 }
 #translated_phrase {
+  position: relative;
+  padding-top: 5px;
   padding-bottom: 10px;
   margin-bottom: 15px;
-  padding-left: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 #sample_phrases {
@@ -89,8 +107,8 @@ color: blue;
 
 #login_form {
   overflow: auto;
-  margin-top: 80px;
-  margin-left: 260px;
+  position: relative;
+  
 }
 #login_link {
   margin-top: 60px;
@@ -98,6 +116,20 @@ color: blue;
 }
 
 #contribute { text-decoration: underline; cursor: pointer;}
+
+#suggestion {
+  margin: auto;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+#contribution_message {
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  color: blue;
+}
 
 .hidden { display: none;}
 
@@ -115,4 +147,157 @@ color: blue;
 @keyframes fadeout {
     from { opacity: 1; }
     to   { opacity: 0; height: 0; }
+}
+
+@media only screen and (max-width: 600px) {
+
+html {
+ height: 50%;
+}
+header {
+  overflow: auto;
+  position: relative;
+  margin-left:60px;
+  margin-bottom: 40px;
+}
+
+body {
+  width:20.33%;
+  font-family: Helvetica;
+  background: linear-gradient(#b3d9ff, #8080ff);
+  background-repeat: no-repeat;
+  font-size: 10px;
+  padding: auto;
+  margin: auto;
+  
+}
+
+img {
+  width:100px;
+  display: block;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto
+}
+
+h1 {
+  font-size: 1.5em;
+  text-align: center;
+}
+label {
+  color: #000000;
+  padding: 20px;
+}
+
+#translation_settings {
+  overflow: auto;
+  position: relative;
+  margin-left: 30px;
+  
+}
+
+.source, .target {
+  float: left;
+  padding: 10px;
+  margin-bottom: 5px;
+  margin-left:30px;
+  font-size: 10px;
+}
+
+#source_phrase {
+  margin-top: 20px;
+}
+
+.error {
+  color: red;
+  font-style: italic;
+  font-size: 5pt;
+}
+
+#translate_button, #login_button {
+  position: relative;
+  border-color: blue;
+  border-width: medium;
+  border-radius: 4px;
+  background-color: transparent;
+  width: 70px;
+  height: 20px;
+  font-size: 10px;
+  color: black;
+  margin-left: 60px;
+  margin-top: 30px;
+}
+
+#translate_button:hover, #login_button:hover {
+border-color: #000000;
+cursor: pointer;
+color: blue;
+}
+
+#target_phrases {
+  position: relative;
+  margin-top: 10px;
+  margin-left: 30px;
+  background-color: transparent;
+  color: black;
+  outline: #000000 solid 2px;
+
+}
+#translated_phrase {
+  position: relative;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#sample_phrases {
+  margin-top: 5px;
+  color: #000000;
+}
+
+#login_form {
+  overflow: auto;
+  position: relative;
+  
+}
+#login_link {
+  margin-top: 60px;
+  margin-left: 280px;
+}
+
+#contribute { text-decoration: underline; cursor: pointer;}
+
+#suggestion {
+  margin: auto;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+#contribution_message {
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  color: blue;
+}
+
+.hidden { display: none;}
+
+.visible { display: block;}
+
+#banner { 
+  position: fixed;
+  width: 50%;
+  top: 5px;
+  background-color: green;
+  animation: fadeout 8s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; height: 0; }
+}
 }

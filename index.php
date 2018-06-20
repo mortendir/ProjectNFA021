@@ -1,4 +1,5 @@
 <?php
+	require_once 'view/error.php';
 	require_once 'controller/translation.php';
 	require_once 'controller/account.php';
 
@@ -64,7 +65,8 @@
 		
 		default : 
 			http_response_code(404);
-			//new NotFoundPage()->display();	
+			$errorView = new ErrorPage();
+			$errorView->display();	
 	}
 	mysqli_close($link);
 ?>

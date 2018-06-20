@@ -26,89 +26,92 @@
 		<h1>Chicken Translate</h1>
 		<?php 
 		if (isset($_SESSION['user'])) {
-			echo '<p>Welcome ' . $_SESSION['user'] . '</p>';
-			echo '<a href="index.php?action=dologout">Log out</a>';
+			echo '<div id="links"><p>Welcome ' . $_SESSION['user'] . '</p>';
+			echo '<a href="index.php?action=dologout">Log out</a></div>';
 		} else {
-			echo '<a href="index.php?action=login">Log in</a>';
-			echo '<a href="index.php?action=signup">Sign up</a>';
+			echo '<div id="links"><a href="index.php?action=login">Log in</a>';
+			echo '<a href="index.php?action=signup">Sign up</a></div>';
 		}
 		?>
 	</header>
-	<form action="index.php" method="post" id="translation">
-		<input type="hidden" id="action" name="action" value="dotranslate">
-		<div id="translation_settings">
-			<div class="source">
-				<div>
-					<label for="source_language">Source Language</label>
-					<select name="source_language" id="source_language">
-						<option></option>
-				    	<?php
-				    	foreach ($this->languages as $language) {
-			    			if ($language->getCode() === $submittedData["source_language"]) {
-			    				echo "<option value=\"" . $language->getCode() ."\" selected>" . $language->getName() ."</option>";
-				    		} else {
-				    			echo "<option value=\"" . $language->getCode() ."\">" . $language->getName() ."</option>";
-				    		}
-				    	}
-				    	?>
-				  	</select>
-				  	<?php if(isset($errors["source_language"])) echo '<span class="error">' . $errors["source_language"] . '</span>';?>
-			  	</div>
-			  	<div>
-					<label for="source_phrase">Source Phrase</label>
-			  		<input type="text" id="source_phrase" name="source_phrase" value="<?php if(isset($submittedData["source_phrase"])) echo $submittedData["source_phrase"]; ?>" />
-			  		<?php if(isset($errors["source_phrase"])) echo '<span class="error">' . $errors["source_phrase"] . '</span>';?>
-		  		</div>
-			</div>
-			<div class="target">
-				<div>
-					<label for="target_language">Target Language</label>
-					<select name="target_language" id="target_language">
-						<option></option>
-						<?php
-				    	foreach ($this->languages as $language) {
-				    		if ($language->getCode() === $submittedData["target_language"]) {
-			    				echo "<option value=\"" . $language->getCode() ."\" selected>" . $language->getName() ."</option>";
-				    		} else {
-				    			echo "<option value=\"" . $language->getCode() ."\">" . $language->getName() ."</option>";
-				    		}
-				    	}
-				    	?>
-					</select>
-					<?php if(isset($errors["target_language"])) echo '<span class="error">' . $errors["target_language"] . '</span>';?>
+	<div id="main">
+		<form action="index.php" method="post" id="translation">
+			<input type="hidden" id="action" name="action" value="dotranslate">
+			<div id="translation_settings">
+				<div class="source">
+					<div>
+						<label for="source_language">Source Language</label>
+						<select name="source_language" id="source_language">
+							<option></option>
+					    	<?php
+					    	foreach ($this->languages as $language) {
+				    			if ($language->getCode() === $submittedData["source_language"]) {
+				    				echo "<option value=\"" . $language->getCode() ."\" selected>" . $language->getName() ."</option>";
+					    		} else {
+					    			echo "<option value=\"" . $language->getCode() ."\">" . $language->getName() ."</option>";
+					    		}
+					    	}
+					    	?>
+					  	</select>
+					  	<?php if(isset($errors["source_language"])) echo '<span class="error">' . $errors["source_language"] . '</span>';?>
+				  	</div>
+				  	<div>
+						<label for="source_phrase">Source Phrase</label>
+				  		<input type="text" id="source_phrase" name="source_phrase" value="<?php if(isset($submittedData["source_phrase"])) echo $submittedData["source_phrase"]; ?>" />
+				  		<?php if(isset($errors["source_phrase"])) echo '<span class="error">' . $errors["source_phrase"] . '</span>';?>
+			  		</div>
 				</div>
-				<?php 
-				if (empty($errors) && !empty($submittedData) || !empty($errors['target_phrase'])) {
-					echo '<div id="target_phrases">';
-					foreach ($translations as $translation) { 
-						echo "<div id='translated_phrase'>" . $translation->getContent() ."<br>";
-						foreach ($translation->getSamplePhrases() as $sample) {
-							echo "<div id='sample_phrases'>" . $sample ."<br>";
-						}
-						echo "</div>";
-					} ?>
-					<?php if (empty($errors['target_phrase'])) { ?>
-					<p id="contribution_message">Would you like to <span id="contribute">add a translation</span>?</p> 
-					<?php } ?>
-					<div id="translation_panel" class="<?php if (empty($errors['target_phrase'])) echo 'hidden'; else echo 'visible'; ?>">
-						<label>Suggestion</label>
-						<input type="text" name="target_phrase" placeholder="Suggestion goes here" value="<?php if(isset($submittedData["target_phrase"])) echo $submittedData["target_phrase"]; ?>" />
-						<?php if(isset($errors["target_phrase"])) echo '<span class="error">' . $errors["target_phrase"] . '</span>';?>
+				<div class="target">
+					<div>
+						<label for="target_language">Target Language</label>
+						<select name="target_language" id="target_language">
+							<option></option>
+							<?php
+					    	foreach ($this->languages as $language) {
+					    		if ($language->getCode() === $submittedData["target_language"]) {
+				    				echo "<option value=\"" . $language->getCode() ."\" selected>" . $language->getName() ."</option>";
+					    		} else {
+					    			echo "<option value=\"" . $language->getCode() ."\">" . $language->getName() ."</option>";
+					    		}
+					    	}
+					    	?>
+						</select>
+						<?php if(isset($errors["target_language"])) echo '<span class="error">' . $errors["target_language"] . '</span>';?>
 					</div>
-					<?php
-					echo '</div>';
-				}?>
+					<?php 
+					if (empty($errors) && !empty($submittedData) || !empty($errors['target_phrase'])) {
+						echo '<div id="target_phrases">';
+						foreach ($translations as $translation) { 
+							echo "<div class='translated_phrase'>" . $translation->getContent() ."<br>";
+							foreach ($translation->getSamplePhrases() as $sample) {
+								echo "<div id='sample_phrases'>" . $sample ."<br>";
+							}
+							echo "</div>";
+						}
+						if (empty($errors['target_phrase'])) { ?>
+							<p id="contribution_message">Would you like to <span id="contribute">add a translation</span>?</p> 
+							<?php } ?>
+							<div id="translation_panel" class="<?php if (empty($errors['target_phrase'])) echo 'hidden'; else echo 'visible'; ?>">
+								<label>Suggestion</label>
+								<input type="text" name="target_phrase" id="suggestion" placeholder="Suggestion goes here" value="<?php if(isset($submittedData["target_phrase"])) echo $submittedData["target_phrase"]; ?>" />
+								<?php if(isset($errors["target_phrase"])) echo '<span class="error">' . $errors["target_phrase"] . '</span>';?>
+							</div>
+							<?php
+						}
+						echo '</div>';?>
+					</div>
 				</div>
 			</div>
-		</div>
-	  	<input type="submit" name="translate" value="<?php if (empty($errors['target_phrase'])) echo 'Translate'; else echo 'Send'; ?>" id="translate_button" />
-	</form>
+		  	<input type="submit" name="translate" value="<?php if (empty($errors['target_phrase'])) echo 'Translate'; else echo 'Send'; ?>" id="translate_button" />
+		</form>
+	</div>
 	<script>
 	main();
 <?php
 if (!empty($errors['target_phrase'])) { ?>
     lockTranslation();
-<?php } ?>
+<?php 
+} ?>
 
 	function main() {
 		var contributeLink = document.querySelector('#contribute');
