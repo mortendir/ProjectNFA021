@@ -80,15 +80,16 @@
 					</div>
 					<?php 
 					if (empty($errors) && !empty($submittedData) || !empty($errors['target_phrase'])) {
-						echo '<div id="target_phrases">';
+						echo "<div id='target_phrases'>";
 						foreach ($translations as $translation) { 
-							echo "<div class='translated_phrase'>" . $translation->getContent() ."<br>";
+							echo "<div class='translated_phrase'>" . $translation->getContent() ."</div><br>";
 							foreach ($translation->getSamplePhrases() as $sample) {
-								echo "<div id='sample_phrases'>" . $sample ."<br>";
+								echo "<div id='sample_phrases'>" . $sample ."</div><br>";
 							}
 							echo "</div>";
 						}
 						if (empty($errors['target_phrase'])) { ?>
+						<div>
 							<p id="contribution_message">Would you like to <span id="contribute">add a translation</span>?</p> 
 							<?php } ?>
 							<div id="translation_panel" class="<?php if (empty($errors['target_phrase'])) echo 'hidden'; else echo 'visible'; ?>">
@@ -96,13 +97,13 @@
 								<input type="text" name="target_phrase" id="suggestion" placeholder="Suggestion goes here" value="<?php if(isset($submittedData["target_phrase"])) echo $submittedData["target_phrase"]; ?>" />
 								<?php if(isset($errors["target_phrase"])) echo '<span class="error">' . $errors["target_phrase"] . '</span>';?>
 							</div>
+						</div>	
 							<?php
 						}
-						echo '</div>';?>
+						echo "</div>";?>
 					</div>
-				</div>
+		  			<input type="submit" name="translate" value="<?php if (empty($errors['target_phrase'])) echo 'Translate'; else echo 'Send'; ?>" id="translate_button" />
 			</div>
-		  	<input type="submit" name="translate" value="<?php if (empty($errors['target_phrase'])) echo 'Translate'; else echo 'Send'; ?>" id="translate_button" />
 		</form>
 	</div>
 	<script>

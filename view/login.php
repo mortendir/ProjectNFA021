@@ -25,7 +25,7 @@ class LoginPage {
 				<?php if(isset($errors["username"])) echo '<span class="error">' . $errors["username"] . '</span>';?>
 			</p>
 			<p>
-				<label>Password:</label>
+				<label>Password: </label>
 				<input type="password" id="password" name="password" />
 				<?php if(isset($errors["password"])) echo '<span class="error">' . $errors["password"] . '</span>';?>
 			</p>

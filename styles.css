@@ -9,8 +9,9 @@ body {
   font-size: 20px;
   padding: 0;
   margin: 0 auto;
-  width: 60%;
+  width: 70%;
 }
+
 
 header {
   margin: 40px auto;
@@ -41,10 +42,6 @@ label {
   padding: 50px;
 }
 
-#translation_settings {
-  clear: both;
-}
-
 .source, .target {
   float: left;
   padding: 10px;
@@ -52,8 +49,9 @@ label {
   margin-left:50px;
 }
 
-#source_phrase {
+ #source_phrase {
   margin-top: 20px;
+
 }
 
 .error {
@@ -63,7 +61,7 @@ label {
 }
 
 input[type=submit] {
-  position: relative;
+  display: block;
   border-color: blue;
   border-width: medium;
   border-radius: 4px;
@@ -72,23 +70,23 @@ input[type=submit] {
   height: 35px;
   font-size: 20px;
   color: black;
-  margin-left: 160px;
-  margin-top: 70px;
+  margin: 70px auto;
+  text-align:center;
 }
 
-#translate_button:hover, #login_button:hover {
-border-color: #000000;
-cursor: pointer;
-color: blue;
+input[type=submit]:hover {
+  border-color: #000000;
+  cursor: pointer;
+  color: blue;
 }
 
 #target_phrases {
   position: relative;
-  margin-top: 10px;
-  margin-left: 30px;
+  margin-top: 15px;
+  margin-left: 50px;
   background-color: transparent;
   color: black;
-  outline: #000000 solid 2px;
+  padding-top: 2px;
 
 }
 #translated_phrase {
@@ -96,6 +94,7 @@ color: blue;
   padding-top: 5px;
   padding-bottom: 10px;
   margin-bottom: 15px;
+  margin-left: 20px;
   padding-left: 30px;
   padding-right: 30px;
 }
@@ -105,11 +104,15 @@ color: blue;
   color: #000000;
 }
 
-#login_form {
-  overflow: auto;
-  position: relative;
-  
+#login_form, #signup_form {
+  width: 500px;
+  margin: 0 auto;   
 }
+
+#translation {
+  overflow: auto;
+}
+
 #login_link {
   margin-top: 60px;
   margin-left: 280px;
@@ -125,9 +128,8 @@ color: blue;
 
 #contribution_message {
   position: relative;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
+  padding-left: 50px;
+  margin-top: 10px;
   color: blue;
 }
 
@@ -148,156 +150,12 @@ color: blue;
     from { opacity: 1; }
     to   { opacity: 0; height: 0; }
 }
-
-@media only screen and (max-width: 600px) {
-
-html {
- height: 50%;
-}
-header {
-  overflow: auto;
-  position: relative;
-  margin-left:60px;
-  margin-bottom: 40px;
-}
-
-body {
-  width:20.33%;
-  font-family: Helvetica;
-  background: linear-gradient(#b3d9ff, #8080ff);
-  background-repeat: no-repeat;
-  font-size: 10px;
-  padding: auto;
-  margin: auto;
-  
-}
-
-img {
-  width:100px;
-  display: block;
-  margin-top: 40px;
-  margin-left: auto;
-  margin-right: auto
-}
-
-h1 {
-  font-size: 1.5em;
-  text-align: center;
-}
-label {
-  color: #000000;
-  padding: 20px;
-}
-
-#translation_settings {
-  overflow: auto;
-  position: relative;
-  margin-left: 30px;
-  
-}
-
-.source, .target {
-  float: left;
-  padding: 10px;
+#username, #password {
   margin-bottom: 5px;
-  margin-left:30px;
-  font-size: 10px;
-}
-
-#source_phrase {
-  margin-top: 20px;
-}
-
-.error {
-  color: red;
-  font-style: italic;
-  font-size: 5pt;
-}
-
-#translate_button, #login_button {
-  position: relative;
-  border-color: blue;
-  border-width: medium;
-  border-radius: 4px;
-  background-color: transparent;
-  width: 70px;
-  height: 20px;
-  font-size: 10px;
-  color: black;
-  margin-left: 60px;
-  margin-top: 30px;
-}
-
-#translate_button:hover, #login_button:hover {
-border-color: #000000;
-cursor: pointer;
-color: blue;
-}
-
-#target_phrases {
-  position: relative;
-  margin-top: 10px;
-  margin-left: 30px;
-  background-color: transparent;
-  color: black;
-  outline: #000000 solid 2px;
-
-}
-#translated_phrase {
-  position: relative;
-  padding-top: 5px;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-#sample_phrases {
-  margin-top: 5px;
-  color: #000000;
-}
-
-#login_form {
-  overflow: auto;
-  position: relative;
   
 }
-#login_link {
-  margin-top: 60px;
-  margin-left: 280px;
+
+input[type=password] {
+  margin-left: 4px;
 }
 
-#contribute { text-decoration: underline; cursor: pointer;}
-
-#suggestion {
-  margin: auto;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-}
-
-#contribution_message {
-  position: relative;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  color: blue;
-}
-
-.hidden { display: none;}
-
-.visible { display: block;}
-
-#banner { 
-  position: fixed;
-  width: 50%;
-  top: 5px;
-  background-color: green;
-  animation: fadeout 8s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes fadeout {
-    from { opacity: 1; }
-    to   { opacity: 0; height: 0; }
-}
-}
